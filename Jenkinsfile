@@ -18,8 +18,8 @@ pipeline {
         stage('Build Images') {
             steps {
                 sh '''
-                    docker build -t notes-backend:build-${BUILD_NUMBER} ./backend
-                    docker build -t notes-frontend:build-${BUILD_NUMBER} ./frontend
+                    docker build --pull -t notes-backend:build-${BUILD_NUMBER} ./backend
+                    docker build --pull -t notes-frontend:build-${BUILD_NUMBER} ./frontend
                 '''
             }
         }
