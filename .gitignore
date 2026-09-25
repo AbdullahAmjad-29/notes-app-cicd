@@ -1,0 +1,15 @@
+# Environment variables / secrets
+.env
+*.env
+
+# Node.js
+node_modules/
+npm-debug.log*
+
+# OS / editor files
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus Notes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">N</div>
+        <span>Nexus</span>
+      </div>
+
+      <button class="new-note-btn" onclick="openEditor()">
+        <span>+</span> New Note
+      </button>
+
+      <nav>
+        <button class="nav-item active" onclick="filterNotes('all')">
+          <span>◉</span> All Notes
+          <span class="count" id="allCount">0</span>
+        </button>
+
+        <button class="nav-item" onclick="filterNotes('favorite')">
+          <span>★</span> Favorites
+        </button>
+
+        <button class="nav-item" onclick="filterNotes('pinned')">
+          <span>📌</span> Pinned
+        </button>
+      </nav>
+
+      <div class="sidebar-section">
+        <div class="section-title">TAGS</div>
+
+        <button class="tag-filter" onclick="filterTag('DevOps')">
+          <span class="tag-dot purple"></span> DevOps
+        </button>
+
+        <button class="tag-filter" onclick="filterTag('Work')">
+          <span class="tag-dot blue"></span> Work
+        </button>
+
+        <button class="tag-filter" onclick="filterTag('Personal')">
+          <span class="tag-dot green"></span> Personal
+        </button>
+
+        <button class="tag-filter" onclick="filterTag('Ideas')">
+          <span class="tag-dot orange"></span> Ideas
+        </button>
+      </div>
+
+      <div class="sidebar-bottom">
+        <button class="theme-btn" onclick="toggleTheme()">
+          ◐ <span>Toggle theme</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main">
+
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR WORKSPACE</p>
+          <h1>My Notes</h1>
+        </div>
+
+        <div class="top-actions">
+          <div class="search-box">
+            <span>⌕</span>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search notes..."
+              oninput="searchNotes()"
+            >
+            <kbd>⌘ K</kbd>
+          </div>
+
+          <div class="avatar">A</div>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="greeting">Welcome back 👋</p>
+          <h2>Capture ideas.<br><span>Build something great.</span></h2>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong id="totalNotes">0</strong>
+            <span>Total notes</span>
+          </div>
+
+          <div class="stat">
+            <strong id="favoriteNotes">0</strong>
+            <span>Favorites</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="content-header">
+        <h3 id="sectionHeading">All Notes</h3>
+        <button class="sort-btn" onclick="toggleSort()">Recently updated ↕</button>
+      </div>
+
+      <section id="notesGrid" class="notes-grid"></section>
+
+      <div id="emptyState" class="empty-state hidden">
+        <div class="empty-icon">✦</div>
+        <h3>No notes found</h3>
+        <p>Create a note or try a different search.</p>
+        <button onclick="openEditor()">Create your first note</button>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Note Editor -->
+  <div id="editorOverlay" class="overlay hidden">
+    <div class="editor">
+
+      <div class="editor-header">
+        <h2 id="editorTitle">New Note</h2>
+        <button class="close-btn" onclick="closeEditor()">×</button>
+      </div>
+
+      <input
+        id="noteTitle"
+        class="title-input"
+        type="text"
+        placeholder="Note title..."
+      >
+
+      <textarea
+        id="noteContent"
+        class="content-input"
+        placeholder="Start writing..."
+      ></textarea>
+
+      <div class="editor-options">
+        <select id="noteTag">
+          <option value="General">General</option>
+          <option value="DevOps">DevOps</option>
+          <option value="Work">Work</option>
+          <option value="Personal">Personal</option>
+          <option value="Ideas">Ideas</option>
+        </select>
+
+        <label>
+          <input type="checkbox" id="noteFavorite">
+          Favorite
+        </label>
+
+        <label>
+          <input type="checkbox" id="notePinned">
+          Pin
+        </label>
+      </div>
+
+      <div class="editor-footer">
+        <button class="cancel-btn" onclick="closeEditor()">Cancel</button>
+        <button class="save-btn" onclick="saveNote()">Save Note</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
